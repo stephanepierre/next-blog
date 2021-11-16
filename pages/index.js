@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import HomeCards from '../components/HomeCards/HomeCards'
 import styles from '../styles/Home.module.css'
+import Link from 'next/link';
+
 
 export default function Home() {
   return (
@@ -20,16 +22,21 @@ export default function Home() {
               title="Lisez les articles"
               subTitle="Maximisez votre culture web"
               text="Chaque auteur tente de vous apporter le plus de valeur possible par article."
-              //href={`/pages/blog.js`}
-              linkText="Visite le blog"
-              />
+            >
+              <Link href="/blog">
+                <a>Visite le blog</a>
+              </Link>
+            </HomeCards>
+
             <HomeCards 
               title="Faites un tour vers la liste de membres"
               subTitle="Faites-vous des amis"
               text="Ajouter, invitez et discutez avec les membres."
-              //href={`/pages/blog.js`}
-              linkText="Découvre la liste de membres"
-            />
+            >
+              <Link href="/liste">
+                <a>Découvre la liste des membres</a>
+              </Link>
+            </HomeCards>
           </div>
         </div>
       </div>
