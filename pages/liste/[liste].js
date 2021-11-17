@@ -16,38 +16,39 @@ export default function liste(props) {
               subTitle="Faites-vous des amis"
               text="Ajouter, invitez et discutez avec les membres."
             >
-              <Link href="/liste">
-                <a>Découvre la liste des membres</a>
-              </Link>
+                <Link href="/liste">
+                    <a>Découvre la liste des membres</a>
+                </Link>
+                <tbody>
+                    {props.listeEnCours.map(element => (
+                    <tr key={uuidv4()}>
+                        <td>{element.en}</td>
+                        <td>{element.fr}</td>
+                    </tr>
+                    ))}
+                </tbody>
             </HomeCards>
-{/*             <tbody>
-                {props.listeEnCours.map(element => (
-                <tr key={uuidv4()}>
-                    <td>{element.en}</td>
-                    <td>{element.fr}</td>
-                </tr>
-                ))}
-            </tbody>
- */}        </>
+        </>
     )
 }
 
-export async function getStaticProps(context){
-    const res = context.params.liste;
+/* export async function getStaticProps(context){
+    /* const res = context.params.liste; */
     const data = await import(`https://jsonplaceholder.typicode.com/users`);
-
-
     console.log(data);
-    const listeEnCours = data.find(list => list.username === res)
+ */
+
+    
+    /* const listeEnCours = data.find(list => list.username === res)
 
     return {
         props: {
             listeEnCours: listeEnCours.data
         }
-    }
+    } */
 }
 
-export async function getStaticPaths() {
+/* export async function getStaticPaths() {
     const data = await import(`https://jsonplaceholder.typicode.com/users`)
 
     //on map sur le tableau de données pour récupérer les names
@@ -60,6 +61,6 @@ export async function getStaticPaths() {
         paths,
 
         fallback: false     // veut dire que si on a un chemin non définit ici dans path/params, on aura une page 404
-        //si on met blocking au lieu de false tout se fera coté serveur (très peu utilisé car lent)
-    }
-}
+                            //si on met blocking au lieu de false tout se fera coté serveur (très peu utilisé car lent)
+    } 
+}   */

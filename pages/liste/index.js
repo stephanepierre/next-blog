@@ -20,16 +20,14 @@ export default function liste(props) {
                 <table className="table table-bordered">
                     <tbody>
                         {props.users.map(user => (
-                            <>
-                                <tr className="text-center" key={uuid_v4()}>
-                                    <td>{user.username}</td>
-                                    <td>
-                                        <Link href={`/liste/${user.username}`}>
-                                            <a>Voir le membre</a>
-                                        </Link>
-                                    </td>
-                                </tr>
-                            </>
+                            <tr className="text-center" key={uuid_v4()}>
+                                <td>{user.username}</td>
+                                <td>
+                                    <Link href={`/liste/${user.username}`}>
+                                        <a>Voir le membre</a>
+                                    </Link>
+                                </td>
+                            </tr>
                         ))}
                     </tbody>
                 </table>

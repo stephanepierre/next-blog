@@ -15,16 +15,16 @@ export default function Home() {
 
       <div className="container">
         <h1 className={styles.title}>Bienvenue sur Code.io</h1>
-        <p>Le blog communautaire des fans du développement web</p>
+        <p className="text-center">Le blog communautaire des fans du développement web</p>
         <div className="container">
-          <div className="row gx-5">
+          <div className="row my-5">
             <HomeCards 
               title="Lisez les articles"
               subTitle="Maximisez votre culture web"
               text="Chaque auteur tente de vous apporter le plus de valeur possible par article."
             >
               <Link href="/blog">
-                <a>Visite le blog</a>
+                <a className="card-link">Visite le blog</a>
               </Link>
             </HomeCards>
 
@@ -34,7 +34,7 @@ export default function Home() {
               text="Ajouter, invitez et discutez avec les membres."
             >
               <Link href="/liste">
-                <a>Découvre la liste des membres</a>
+                <a className="card-link">Découvre la liste des membres</a>
               </Link>
             </HomeCards>
           </div>
