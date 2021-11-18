@@ -1,66 +1,67 @@
 import React from 'react'
 import Head from 'next/head'
 import HomeCards from '../../components/HomeCards/HomeCards'
-import Link from 'next/link'
 
 
 export default function liste(props) {
     return (
         <>
             <Head>
-                <title>membre</title>
-                <meta name="description" content="un de nos membres ayant écrit un article" />
+                <title>membre {props.listeEnCours.username}</title>
+                <meta name="description" content={`Notre membre ${props.listeEnCours.username}`} />
             </Head>
-            <HomeCards 
-              title="Faites un tour vers la liste de membres"
-              subTitle="Faites-vous des amis"
-              text="Ajouter, invitez et discutez avec les membres."
-            >
-                <Link href="/liste">
-                    <a>Découvre la liste des membres</a>
-                </Link>
-                <tbody>
-                    {props.listeEnCours.map(element => (
-                    <tr key={uuidv4()}>
-                        <td>{element.en}</td>
-                        <td>{element.fr}</td>
-                    </tr>
-                    ))}
-                </tbody>
-            </HomeCards>
+            <div className="row justify-content-center mt-5">
+                <h2 className="text-center">Nom du membre: {props.listeEnCours.username}</h2>
+                <HomeCards 
+                title={props.listeEnCours.name}
+                subTitle={`Username: ${props.listeEnCours.username}`}
+                >
+                    <ul className="list-group">
+                        <li className="list-group-item">
+                            Email: {props.listeEnCours.email}
+                        </li>
+                        <li className="list-group-item">
+                            Site web: {props.listeEnCours.website}
+                        </li>
+                        <li className="list-group-item">
+                            Téléphone: {props.listeEnCours.phone}
+                        </li>
+                    </ul>
+
+                </HomeCards>
+            </div>
         </>
     )
 }
 
-/* export async function getStaticProps(context){
-    /* const res = context.params.liste; */
-    const data = await import(`https://jsonplaceholder.typicode.com/users`);
-    console.log(data);
- */
-
+export async function getStaticProps(context){
+    const id = context.params.liste; 
+    const data = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
     
-    /* const listeEnCours = data.find(list => list.username === res)
+    const listeEnCours = await data.json();
 
     return {
         props: {
-            listeEnCours: listeEnCours.data
+            listeEnCours
         }
-    } */
+    } 
 }
 
-/* export async function getStaticPaths() {
-    const data = await import(`https://jsonplaceholder.typicode.com/users`)
+export async function getStaticPaths() {
 
-    //on map sur le tableau de données pour récupérer les names
-    const paths = data.map(item => ({
-        params: {liste: item.username}
+    //on indique où récupérer les données
+    const data = await fetch(`https://jsonplaceholder.typicode.com/users`);
+    const users = await data.json();
+
+    //on fourni un tableau avec tous les chemins
+    const paths = users.map(item => ({
+        params: {liste: item.id.toString()},
     }))
 
+    //on retourne les diférents chemin créés et le fallback
     return {
-        //on utilise les nomsqu'on a récupéré dans le map de la constante paths du dessus
         paths,
+        fallback: false
+    }
+}
 
-        fallback: false     // veut dire que si on a un chemin non définit ici dans path/params, on aura une page 404
-                            //si on met blocking au lieu de false tout se fera coté serveur (très peu utilisé car lent)
-    } 
-}   */
